@@ -4,29 +4,31 @@
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-md-offset-3"/>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-md-offset-3">
 
-            <input type="email" class="form-control" placeholder="email" v-model="formData.email">
-            <br>
-            <input type="password" class="form-control" placeholder="password" v-model="formData.password">
-            <br>
+            <!--Zutaten sollen ausgewählt werden können mit Buttons oder Dropdown Menü?-->
 
             <button @click="signUp" class="btn btn-success">SignUp</button>
         </div>
     </div>
 </template>
 <script>
-import{getAuth, createUserWithEmailAndPassword} from "firebase/auth"
+
 export default {
-  name: 'SignUp',
+  name: 'FindRecipe',
   data () {
     return {
-      formData: {
-        email: '',
-        password: ''
+      recipeData: {
+        recipe: null,
+        recipes: {},
+        recipeId: {},
       }
     }
   },
   methods: {
      findRecipes(){} //search for Ingredients
+     //retreive the Recipe_ID from Recipe_Ingredients where Recipe_Ingredients.Ingredient_Name == Entry_Ingredient_Name
+     //--> for every entered Ingredient
+     //display every recipe with the found Recipe_ID like in RecipeList with Routerlink to Info about Recipe like in RecipeList
+
   }
 }
 </script>

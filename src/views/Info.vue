@@ -16,6 +16,8 @@
          </div>
         
         <div class="col-sm-6 col-md-4" v-for="(recipe, key) in recipes" :key = 'key' >
+          <div class="col-sm-6 col-md-4" v-for="(ingredientDetail, key) in ingredientDetails" :key = 'key' >
+        
         
           <div class="thumbnail">
             <img src="" width=80%>
@@ -30,9 +32,15 @@
               <p class="totalcarbs">Carbs:{{recipe.Total_Carbs}}g</p>
               <p class="servings">Servings:{{recipe.Servings}}</p>
               <p class="style">Style:{{recipe.Style}}</p>
-              <p class="ingredients">Ingredients:{{this.ingredients}}</p>
-              <p class="instructions">Instructions:{{recipe.Instructions}}</p>
+              <p class="ingredients">Ingredients:</p>
+              <li v-for="(ingredient,key) in ingredients" :key='key'>
+            <p class="ingredients_values">{{ingredient.Ingredient_Name}}
+              {{ ingredient.Quantity }}
+            {{ ingredientDetail.Unit }}</p></li>
               
+              <p class="instructions">Instructions:{{recipe.Instructions}}</p>
+            </div>
+            
             </div>
         </div>
     </div>
@@ -63,10 +71,12 @@
         recipe: this.$route.params.recipe,
         recipes: {},
         recipeId:{},
-        ingredients:[],
-        recipeIngredient: null,
-        recipeIngredients: {},
-        userIds:{},
+        ingredient: null,
+        ingredients:{},
+        ingredientIds: {},
+        ingredientDetail: null,
+        ingredientDetails:{},
+        ingredientDetailIds: {},
 
       }
     
@@ -75,33 +85,33 @@
       mounted () {
       console.log('Recipe Info')
       const db = getFirestore()
-      const colRef = collection(db, "Recipe")
-
+      const colRefRecipe = collection(db, "Recipe")
+      const colRefRecipe_Ingredients = collection(db,"Recipe_Ingredients")
+      const colRefIngredients = collection(db,"Ingredient")
       
-      onSnapshot(colRef, snapShot => {
+      onSnapshot(colRefRecipe, snapShot => {
         this.recipes = snapShot.docs.map(doc => doc.data())
         this.recipeId = snapShot.docs.map(doc => doc.id)
-        this.getIngredients()
+        
        
       })
-      
+      console.log("fetching ingredients")
+      onSnapshot(colRefRecipe_Ingredients, snapshot => {
+      this.ingredients = snapshot.docs.map(doc => doc.data())
+      this.ingredientIds = snapshot.docs.map(doc => doc.id)
+      console.log(this.ingredients)})
+
+      console.log("fetching ingredient details")
+      onSnapshot(colRefIngredients, snapshot => {
+      this.ingredientDetails = snapshot.docs.map(doc => doc.data())
+      this.ingredientDetailIds = snapshot.docs.map(doc => doc.id)
+      console.log(this.ingredientDetails)})
+      //get Unit from the document in Ingredient where : Ingredient.Ingredient_Name == Recipe_Ingredient.Ingredient_Name 
       
     },
     
   methods: {
-    async getIngredients() {
-        console.log("getting ingredients")
-      const db = getFirestore()
-      const q = query(collection(db, 'Recipe_Ingredient'), where('Recipe_ID', '==', this.recipeId))
-      console.log(this.recipeId)
-      const querySnap = await getDocs(q);
-
-      querySnap.forEach((doc) => {
-        this.ingredients.push(doc.data())
-      })
-      console.log("these are the ingredients:"+this.ingredients)
-
-    },
+     
     async setFavorite(){
       console.log("getting User_ID")
       const dbUser = getFirestore()
