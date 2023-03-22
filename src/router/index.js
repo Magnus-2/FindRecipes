@@ -44,15 +44,6 @@ const router = createRouter({
       path: '/signup',
       name: 'SignUp',
       component: SignUp
-    },
-    {
-      path: '/profile/:user',
-      name: 'Profile',
-      component:Profile,
-      meta:{
-        requireAuth:true
-      }
-
     }
   ]
 })

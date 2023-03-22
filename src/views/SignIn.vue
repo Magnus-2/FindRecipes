@@ -16,28 +16,19 @@
 
 <script>
 import {getAuth, signInWithEmailAndPassword} from "firebase/auth"
-import {getFirestore} from "firebase/firestore"
 export default {
   name: 'SignIn',
   data () {
     return {
       formData: {
         email: '',
-        password: '',
-        userId:{}
+        password: ''
       }
     }
   },
   methods: {
     signIn () {
       console.log('Signin')
-      console.log('Getting User_ID')
-      const db = getFirestore()
-      const colRef = collection(db, "User")
-      onSnapshot(colRef, snapShot => {
-        this.userId = snapShot.docs.map(doc => doc.id())
-        
-      })  
       const auth = getAuth()
             signInWithEmailAndPassword(
                 auth,
@@ -46,7 +37,7 @@ export default {
             )
             .then((userCredential)=>{
                 console.log("Successfully sign in!")
-                this.$router.replace('/profile/:'+this.userId)
+                this.$router.replace('/recipes')
             })
             .catch((error) => {
                 console.log(error.code)

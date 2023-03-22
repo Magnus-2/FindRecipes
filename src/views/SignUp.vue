@@ -14,13 +14,13 @@
             <br> 
            <!-- we need a dropdown menu where a user can choose if he is omnivore, vegetarian, vegan or halal)-->
 
-            <button @click="addUser(),signUp() " class=" btn btn-success " >SignUp</button>
+            <button @click="signUp() " class=" btn btn-success " >SignUp</button>
         </div>
     </div>
 </template>
 <script>
 import{getAuth, createUserWithEmailAndPassword} from "firebase/auth"
-import {getFirestore, doc, setDoc} from 'firebase/firestore'
+import {getFirestore, doc} from 'firebase/firestore'
 export default {
   name: 'SignUp',
   data () {
@@ -34,10 +34,9 @@ export default {
     }
   },
   methods: {
-     signUp (){
-            const auth = getAuth()
-           
-           console.log("User successfully added")
+    signUp () {
+      console.log('SignUp')
+      const auth = getAuth()
             createUserWithEmailAndPassword(
                 auth,
                 this.formData.email,
@@ -52,16 +51,15 @@ export default {
                 alert(error.message)
             })
             
-        },
-        async addUser(){
-          const db = getFirestore()
-        
-          colRef = doc(collection(db,"User"))
-           const dataObj = { Diet: this.diet, Username: this.username}
+        }/*,
+      async addUser(){
+           const db = getFirestore()
+           const colRef = doc(collection(db,"User"))
+           const dataObj = {Email: this.email, Diet: this.diet, Username: this.username}
            const docRef = await setDoc(colRef,dataObj)
-           console.log("User added successfully!")
-  }}
-        
+           console.log("User successfully added")
+      }*/
+  }
 }
 </script>
 
