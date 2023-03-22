@@ -5,6 +5,7 @@ import Info from '@/views/Info.vue'
 import SignIn from '@/views/SignIn.vue'
 import SignUp from '@/views/SignUp.vue'
 import Profile from '@/views/Profile.vue'
+import FindRecipes from '@/views/FindRecipe.vue'
 
 import {getAuth, onAuthStateChanged} from 'firebase/auth'
 
@@ -35,6 +36,12 @@ const router = createRouter({
         requireAuth: true
       }
     },
+    {
+      path: '/findrecipes',
+      name: 'FindRecipes',
+      component: FindRecipes,
+      
+      },
     {
       path: '/signin',
       name: 'SignIn',

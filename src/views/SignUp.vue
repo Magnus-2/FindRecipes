@@ -51,16 +51,22 @@ export default {
                 alert(error.message)
             })
             
-        }/*,
-      async addUser(){
+        }/*, 
+        addUser soll die USer zur Datenbank hinzufügen um Speichern von Fvoriten zu ermöglichen
+       addUser(){
            const db = getFirestore()
            const colRef = doc(collection(db,"User"))
-           const dataObj = {Email: this.email, Diet: this.diet, Username: this.username}
-           const docRef = await setDoc(colRef,dataObj)
-           console.log("User successfully added")
-      }*/
-  }
-}
+           const dataObj = {Email: this.email, Diet: this.diet, Username: this.username};
+           setDoc(colRef,dataObj)
+           .then(docRef => {
+            console.log("Document has been added successfully")
+})
+          .catch(error => {
+          console.log(error);
+})
+        
+}*/
+}}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

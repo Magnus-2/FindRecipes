@@ -16,7 +16,7 @@
          </div>
         
         <div class="col-sm-6 col-md-4" v-for="(recipe, key) in recipes" :key = 'key' >
-          <div class="col-sm-6 col-md-4" v-for="(ingredientDetail, key) in ingredientDetails" :key = 'key' >
+          
         
         
           <div class="thumbnail">
@@ -33,6 +33,9 @@
               <p class="servings">Servings:{{recipe.Servings}}</p>
               <p class="style">Style:{{recipe.Style}}</p>
               <p class="ingredients">Ingredients:</p>
+              <div class="col-sm-6 col-md-4" v-for="(ingredientDetail, key) in ingredientDetails" :key = 'key' >
+              <!--Momentan werden noch alle Ingredients die in der Datebank gefunden werden angesprochen
+              Es sollen jedoch nur jene abgerufen werden, deren -->
               <li v-for="(ingredient,key) in ingredients" :key='key'>
             <p class="ingredients_values">{{ingredient.Ingredient_Name}}
               {{ ingredient.Quantity }}
@@ -55,8 +58,12 @@
       </div>
     
       <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"/>
+      <div class="col-sm-6 col-md-4" v-for="(recipe, key) in recipes" :key = 'key' >
       <p><b>Author:</b> </p>
+      <p>{{ recipe.User_ID_Publisher }}</p>
+
       </div>
+    </div>
       
     </template>
     <script>
@@ -77,6 +84,8 @@
         ingredientDetail: null,
         ingredientDetails:{},
         ingredientDetailIds: {},
+        users:{},
+        user:null
 
       }
     
@@ -86,12 +95,17 @@
       console.log('Recipe Info')
       const db = getFirestore()
       const colRefRecipe = collection(db, "Recipe")
+      //Aus Recipe_Ingredients sollen nur jene Dokumente abgerufen werden bei denen gilt:
+      //ingredients = Recipe_Ingredients.Recipe_ID == this.recipeId
       const colRefRecipe_Ingredients = collection(db,"Recipe_Ingredients")
+      // Aus "Ingredient" sollen nur Dokumente abgerufen werden bei denen gilt:
+      //(ingredients Array aus vorheriger Abfrage) ingredients.Ingredient_Name == (Datenbank Ingredient) Ingredient.Ingredient_Name
       const colRefIngredients = collection(db,"Ingredient")
       
       onSnapshot(colRefRecipe, snapShot => {
         this.recipes = snapShot.docs.map(doc => doc.data())
         this.recipeId = snapShot.docs.map(doc => doc.id)
+        this.users = snapShot.docsmap(doc => doc.data().User_ID_Publisher)
         
        
       })
@@ -107,6 +121,7 @@
       this.ingredientDetailIds = snapshot.docs.map(doc => doc.id)
       console.log(this.ingredientDetails)})
       //get Unit from the document in Ingredient where : Ingredient.Ingredient_Name == Recipe_Ingredient.Ingredient_Name 
+      
       
     },
     
@@ -128,6 +143,7 @@
       })
 
     }
+    
       
   }}
     </script>

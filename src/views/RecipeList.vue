@@ -20,7 +20,7 @@
               <p class="recipename">{{recipe.Recipe_Name}}</p>
               
               <router-link :to = "{path: 'info', name: 'Info', params:{recipe:recipe.Recipe_Name}}">
-              <button class="btn btn-success" role="button">Detail</button>
+              <button class="btn btn-success" role="button">See Recipe</button>
              </router-link>
             </div>
         
