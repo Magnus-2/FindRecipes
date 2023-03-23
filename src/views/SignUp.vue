@@ -14,7 +14,7 @@
             <br> 
            <!-- we need a dropdown menu where a user can choose if he is omnivore, vegetarian, vegan or halal)-->
 
-            <button @click="addUser() " class=" btn btn-success " >SignUp</button>
+            <button @click="addUser(), signUp() " class=" btn btn-success " >SignUp</button>
         </div>
     </div>
 </template>
