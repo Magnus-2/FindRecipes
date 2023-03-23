@@ -4,9 +4,10 @@
     
       
       <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+        <div class="col-sm-6 col-md-4" v-for="(recipe, key) in recipes" :key = 'key' >
         <div class="panel panel-info" >
             <div class="panel-heading">
-              <h3 class="panel-title">Recipe Name</h3>
+              <h3 class="panel-title"> {{ recipe.Recipe_Name }}</h3>
             </div>
             <div class="panel-body">
               <div class="row">
@@ -15,7 +16,7 @@
               
          </div>
          
-        <div class="col-sm-6 col-md-4" v-for="(recipe, key) in recipes" :key = 'key' >
+        
           
 
           
@@ -24,9 +25,7 @@
           <div class="thumbnail">
             <img src="" width=80%>
             <div class="caption">
-              <p><b>Recipe Name</b></p>
-              <p class="recipename">{{recipe.Recipe_Name}}</p>
-              <p class="recipeID">{{recipeId}}</p>
+            
               <img :src="`../src/assets/${recipe.image}`" style="width: 200px"/><!--here we have to access the database to retrieve the picture-->
 
               <p class="totalcalories">Total kcal:{{recipe.Total_kcal}}kcal</p>

@@ -14,13 +14,13 @@
             <br> 
            <!-- we need a dropdown menu where a user can choose if he is omnivore, vegetarian, vegan or halal)-->
 
-            <button @click="signUp() " class=" btn btn-success " >SignUp</button>
+            <button @click="addUser() " class=" btn btn-success " >SignUp</button>
         </div>
     </div>
 </template>
 <script>
 import{getAuth, createUserWithEmailAndPassword} from "firebase/auth"
-import {getFirestore, doc} from 'firebase/firestore'
+import {getFirestore, addDoc, collection} from 'firebase/firestore'
 export default {
   name: 'SignUp',
   data () {
@@ -51,22 +51,18 @@ export default {
                 alert(error.message)
             })
             
-        }/*, 
-        addUser soll die USer zur Datenbank hinzufügen um Speichern von Fvoriten zu ermöglichen
-       addUser(){
+        }, 
+        //addUser soll die USer zur Datenbank hinzufügen um Speichern von Fvoriten zu ermöglichen
+       async addUser(){
            const db = getFirestore()
-           const colRef = doc(collection(db,"User"))
-           const dataObj = {Email: this.email, Diet: this.diet, Username: this.username};
-           setDoc(colRef,dataObj)
-           .then(docRef => {
-            console.log("Document has been added successfully")
-})
-          .catch(error => {
-          console.log(error);
-})
+           const docRef = await addDoc(collection(db, "User"), {
+            Email: this.formData.email,
+            Diet: this.formData.diet,
+            Username: this.formData.username
+          });
+            console.log("Document written with ID: ", docRef.id);}}}
         
-}*/
-}}
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
