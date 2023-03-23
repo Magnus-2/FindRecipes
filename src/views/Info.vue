@@ -14,7 +14,7 @@
               
               
          </div>
-        
+         <img :src="`./src/assets/${recipe.image}`" width=80%>
         <div class="col-sm-6 col-md-4" v-for="(recipe, key) in recipes" :key = 'key' >
           
         
@@ -25,7 +25,7 @@
               <p><b>Recipe Name</b></p>
               <p class="recipename">{{recipe.Recipe_Name}}</p>
               <p class="recipeID">{{recipeId}}</p>
-
+              
               <p class="totalcalories">Total kcal:{{recipe.Total_kcal}}kcal</p>
               <p class="totalproteins">Proteins:{{recipe.Total_Protein}}g</p>
               <p class="totalfats">Fats:{{recipe.Total_Fats}}g</p>
@@ -33,14 +33,12 @@
               <p class="servings">Servings:{{recipe.Servings}}</p>
               <p class="style">Style:{{recipe.Style}}</p>
               <p class="ingredients">Ingredients:</p>
-              <div class="col-sm-6 col-md-4" v-for="(ingredientDetail, key) in ingredientDetails" :key = 'key' >
-              <!--Momentan werden noch alle Ingredients die in der Datebank gefunden werden angesprochen
-              Es sollen jedoch nur jene abgerufen werden, deren -->
-              <li v-for="(ingredient,key) in ingredients" :key='key'>
-            <p class="ingredients_values">{{ingredient.Ingredient_Name}}
-              {{ ingredient.Quantity }}
-            {{ ingredientDetail.Unit }}</p></li>
-              
+              <div v-for="(ingredientDetail, index) in ingredientDetails" :key="index">
+              <p class="ingredients_values">{{ ingredients[index].Ingredient_Name }}
+                {{ ingredients[index].Quantity }}
+                {{ ingredientDetail.Unit }}
+              </p>
+            </div>
               <p class="instructions">Instructions:{{recipe.Instructions}}</p>
             </div>
             
@@ -63,7 +61,7 @@
       <p>{{ recipe.User_ID_Publisher }}</p>
 
       </div>
-    </div>
+   
       
     </template>
     <script>
@@ -105,7 +103,7 @@
       onSnapshot(colRefRecipe, snapShot => {
         this.recipes = snapShot.docs.map(doc => doc.data())
         this.recipeId = snapShot.docs.map(doc => doc.id)
-        this.users = snapShot.docsmap(doc => doc.data().User_ID_Publisher)
+        this.users = snapShot.docs.map(doc => doc.data().User_ID_Publisher)
         
        
       })
