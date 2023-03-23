@@ -14,8 +14,10 @@
               
               
          </div>
-         <img :src="`./src/assets/${recipe.image}`" width=80%>
+         
         <div class="col-sm-6 col-md-4" v-for="(recipe, key) in recipes" :key = 'key' >
+          
+
           
         
         
@@ -25,7 +27,8 @@
               <p><b>Recipe Name</b></p>
               <p class="recipename">{{recipe.Recipe_Name}}</p>
               <p class="recipeID">{{recipeId}}</p>
-              
+              <img :src="`../src/assets/${recipe.image}`" style="width: 200px"/><!--here we have to access the database to retrieve the picture-->
+
               <p class="totalcalories">Total kcal:{{recipe.Total_kcal}}kcal</p>
               <p class="totalproteins">Proteins:{{recipe.Total_Protein}}g</p>
               <p class="totalfats">Fats:{{recipe.Total_Fats}}g</p>
@@ -49,7 +52,6 @@
                 </div>
               </div>
               <div class="row">
-                <img :src="``" alt=""><!--here we have to access the database to retrieve the picture-->
               </div>
             </div>
           
@@ -125,7 +127,7 @@
     
   methods: {
      
-    async setFavorite(){
+     setFavorite(){
       console.log("getting User_ID")
       const dbUser = getFirestore()
       const colRefUser = collection(dbUser, "User")
