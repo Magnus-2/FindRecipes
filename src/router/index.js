@@ -6,6 +6,7 @@ import SignIn from '@/views/SignIn.vue'
 import SignUp from '@/views/SignUp.vue'
 import Profile from '@/views/Profile.vue'
 import FindRecipes from '@/views/FindRecipe.vue'
+import Home from '@/views/HomeView.vue'
 
 import {getAuth, onAuthStateChanged} from 'firebase/auth'
 
@@ -14,11 +15,11 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/recipes'
+      redirect: '/home'
     },
     {
-      path: '/:catchAll(.*)',
-      redirect: '/SignIn'
+       path: '/:catchAll(.*)',
+       redirect: '/SignIn'
     },
     {
       path: '/recipes',
@@ -51,6 +52,11 @@ const router = createRouter({
       path: '/signup',
       name: 'SignUp',
       component: SignUp
+    },
+    {
+      path: '/home',
+      name: 'Home',
+      component: Home
     }
   ]
 })
