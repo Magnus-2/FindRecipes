@@ -1,69 +1,105 @@
 <template>
-    <div class="Info">
-      <div>
-    
-      
-      <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-        <div class="col-sm-6 col-md-4" v-for="(recipe, key) in recipes" :key = 'key' >
-        <div class="panel panel-info" >
-            <div class="panel-heading">
-              <h3 class="panel-title"> {{ recipe.Recipe_Name }}</h3>
-            </div>
-            <div class="panel-body">
-              <div class="row">
-                
-              
-              
-         </div>
-         
-        
-          
+  <html lang="en">
+    <head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Start your development with Dorang landing page.">
+    <meta name="author" content="Devcrud">
+    <title>Info Recipe</title>
 
-          
-        
-        
-          <div class="thumbnail">
-            <img src="" width=80%>
-            <div class="caption">
-            
-              <img :src="`../src/assets/${recipe.image}`" style="width: 200px"/><!--here we have to access the database to retrieve the picture-->
 
-              <p class="totalcalories">Total kcal:{{recipe.Total_kcal}}kcal</p>
-              <p class="totalproteins">Proteins:{{recipe.Total_Protein}}g</p>
-              <p class="totalfats">Fats:{{recipe.Total_Fats}}g</p>
-              <p class="totalcarbs">Carbs:{{recipe.Total_Carbs}}g</p>
-              <p class="servings">Servings:{{recipe.Servings}}</p>
-              <p class="style">Style:{{recipe.Style}}</p>
-              <p class="ingredients">Ingredients:</p>
-              <div v-for="(ingredientDetail, index) in ingredientDetails" :key="index">
-              <p class="ingredients_values">{{ ingredients[index].Ingredient_Name }}
-                {{ ingredients[index].Quantity }}
-                {{ ingredientDetail.Unit }}
-              </p>
-            </div>
-              <p class="instructions">Instructions:{{recipe.Instructions}}</p>
-            </div>
+</head>
+<nav id="nav" class="page-navbar" data-spy="affix" data-offset-top="10">
+        <ul class="nav-navbar container">
+            <li class="nav-item">
+              <router-link to="/">
+                <a class="nav-link">Home</a>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="../recipes">
+               <a class="nav-link">Recipes</a>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/">
+               <a class="nav-link"><img src="../assets/imgs/logo.png" ></a>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="../profile">
+                <a class="nav-link">Profile</a>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="../signin">
+                <a class="nav-link">Login/Logout</a>
+              </router-link>
+            </li>
             
-            </div>
+        </ul>
+    </nav>
+<br><br><br><br>
+
+
+<body
+    data-spy="scroll"
+    data-target=".navbar"
+    data-offset="40"
+    id="home"
+    class="dark-theme">
+
+    <div class="theme-selector">
+        <a href="javascript:void(0)" class="spinner">
+            <i class="ti-paint-bucket"></i>
+        </a>
+        <div class="body">
+            <a href="javascript:void(0)" class="light"></a>
+            <a href="javascript:void(0)" class="dark"></a>
         </div>
     </div>
-                   
-                </div>
-              </div>
-              <div class="row">
-              </div>
-            </div>
-          
-      </div>
-    
-      <!-- <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"/>
-      <div class="col-sm-6 col-md-4" v-for="(recipe, key) in recipes" :key = 'key' >
-      <p><b>Author:</b> </p>
-      <p>{{ recipe.User_ID_Publisher }}</p>
 
-      </div> -->
-   
-      
+    <!-- page container -->
+    <div class="container page-container" v-for="(recipe, key) in recipes" :key='key'>
+        <div class="col-md-10 col-lg-8 m-auto">
+            <h6 class="title mb-4">{{ recipe.Recipe_Name }}</h6>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-md-6">
+                <a class="card">
+                    <img v-bind:src="recipe.imageUrl" width="400" height="300" class="card-img" alt="pic">
+                        <div class="card-body">
+                            <p>{{recipe.Instructions}}</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a class="card">
+                        <div class="card-body">
+                          <p class="totalcalories">Total kcal:{{recipe.Total_kcal}}kcal</p>
+                                    <p class="totalproteins">Proteins:{{recipe.Total_Protein}}g</p>
+                                    <p class="totalfats">Fats:{{recipe.Total_Fats}}g</p>
+                                    <p class="totalcarbs">Carbs:{{recipe.Total_Carbs}}g</p>
+                                    <p class="servings">Servings:{{recipe.Servings}}</p>
+                                    <p class="style">Style:{{recipe.Style}}</p>
+                            <p>Ingredients:</p>
+                            <ul>
+                                <li><div v-for="(ingredientDetail, index) in ingredientDetails" :key="index">
+                                        <p class="ingredients_values">{{ ingredients[index].Ingredient_Name }}
+                                            {{ ingredients[index].Quantity }}
+                                            {{ ingredientDetail.Unit }}
+                                        </p>
+                                    </div></li>
+                            </ul>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- end of page container -->
+        </div>
+</body>
+</html>
     </template>
     <script>
     import {where, query, collection, onSnapshot, doc, getFirestore, getDocs} from "firebase/firestore"
