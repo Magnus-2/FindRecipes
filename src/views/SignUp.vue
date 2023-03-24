@@ -1,22 +1,88 @@
 <template>
-    <div class="row">
-        <h2>SignUp</h2>
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-md-offset-3"/>
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-md-offset-3">
+  <html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Kodinger">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Sign Up</title>
+</head>
+    <body class="my-login-page">
+	<section class="h-100">
+		<div class="container h-100">
+			<div class="row justify-content-md-center h-100">
+				<div class="card-wrapper">
+					<div class="brand">
+                        <!-- Logo -->
+						<img src="../assets/imgs/logo.png" alt="bootstrap 4 login page">
+					</div>
+					<div class="card fat">
+						<div class="card-body">
+							<h4 class="card-title">Register</h4>
 
-            <input type="email" class="form-control" placeholder="email" v-model="formData.email">
-            <br>
-            <input type="password" class="form-control" placeholder="password" v-model="formData.password">
-            <br>
-            <input type="username" class="form-control" placeholder="Username" v-model="formData.username">
-            <br>
-            <input type="diet" class="form-control" placeholder="Diet: omnivore/vegan/vegetarian/halal" v-model="formData.diet">
-            <br> 
-           <!-- we need a dropdown menu where a user can choose if he is omnivore, vegetarian, vegan or halal)-->
+								<div class="form-group">
+									<label for="name">Name</label>
+									<input id="name" type="text" class="form-control" name="name" placeholder="Username" v-model="formData.username" required autofocus>
+									<div class="invalid-feedback">
+										What's your name?
+									</div>
+								</div>
 
-            <button @click="addUser(), signUp() " class=" btn btn-success " >SignUp</button>
-        </div>
-    </div>
+								<div class="form-group">
+									<label for="email">E-Mail Address</label>
+									<input id="email" type="email" class="form-control" name="email" placeholder="email" v-model="formData.email" required>
+									<div class="invalid-feedback">
+										Your email is invalid
+									</div>
+								</div>
+                
+
+								<div class="form-group">
+									<label for="password">Password</label>
+									<input id="password" type="password" class="form-control" name="password" placeholder="password" v-model="formData.password" required data-eye>
+									<div class="invalid-feedback">
+										Password is required
+									</div>
+								</div>
+                                <p style="color: black">Choose your Orientation</p>
+                                <select  class="form-select" aria-label="Default select example" v-model="formData.diet">
+                                    <!-- <option selected>Orientation</option> -->
+                                    <option value="1">Unrestricted</option>
+                                    <option value="2">Vegan</option>
+                                    <option value="3">Vegetarian</option>
+                                    <option value="4">Helal</option>
+                                  </select>
+
+
+								<!-- <div class="form-group">
+									<div class="custom-checkbox custom-control">
+										<input type="checkbox" name="agree" id="agree" class="custom-control-input" required="">
+										<label for="agree" class="custom-control-label">I agree to the <a href="#">Terms and Conditions</a></label>
+										<div class="invalid-feedback">
+											You must agree with our Terms and Conditions
+										</div>
+									</div>
+								</div> --> <br><br>
+
+								<div class="form-group m-0">
+									<button id="signinbutton" @click="addUser(), signUp() " class=" btn btn-primary btn-block " >Sign Up</button>
+								</div>
+								<div class="mt-4 text-center">
+                  <router-link to="/signin">
+                      <a id="text"> Already have an account? &nbsp; </a> <button class="btn btn-success" id="createonebutton" role="button">Sign In</button>
+                   </router-link>
+								</div>
+							
+						</div>
+					</div>
+					<div class="footer">
+						Copyright &copy; 2023 &mdash; Recipes finder
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+    </html>
 </template>
 <script>
 import{getAuth, createUserWithEmailAndPassword} from "firebase/auth"
@@ -67,6 +133,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+@import '../assets/css/login.css';
+@import url("https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css");  
 h1,
 h2 {
   font-weight: normal;
