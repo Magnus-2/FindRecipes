@@ -14,18 +14,6 @@
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home" class="dark-theme">
     
-    <!-- page navbar -->
-    <nav class="page-navbar" data-spy="affix" data-offset-top="10">
-        <ul class="nav-navbar container">
-            <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-            <li class="nav-item"><a href="recipe.html" class="nav-link">Recipe</a></li>
-            <li class="nav-item"><a href="search.html" class="nav-link"><img src="../assets/imgs/logo.png" ></a></li>
-            <li class="nav-item"><a href="profile.html" class="nav-link">Profile</a></li>
-            <li class="nav-item"><a href="login.html" class="nav-link">Login/Logout</a></li>
-            
-        </ul>
-    </nav>
-    <!-- end of page navbar -->
 
     <div class="theme-selector">
         <a href="javascript:void(0)" class="spinner">
